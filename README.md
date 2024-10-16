@@ -1,2 +1,2 @@
-# visualization-of-transcriptomics-data
-#Volcano, Enhanced Volcano, Heatmap
+# general visualization-of-transcriptomics-data through Volcano, Enhanced Volcano, Heatmap
+This file contains multiple scripts for RNA sequencing data visualization. The RNA sequencing data was generated mainly from human and rat placental samples and fetal brain samples.
