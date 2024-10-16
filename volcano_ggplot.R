@@ -29,3 +29,21 @@ ggplot(data = df, aes(x = log2FoldChange, y = -log10(padj), col = diffexpressed,
   ggtitle('FDD vs Knock out') +# Plot title 
   geom_text_repel()# To show all labels 
 #coord_cartesian(ylim = c(0, 250), xlim = c(-10, 10))
+
+#we can also create some levels for the genes and modify plots accordingly
+#create some label for the genes
+genes_to_label <- c("Rack1", "Ptma", "S100a6", "Rpl37", "Slc6a4", "Tmem79", "Ccdc40", "Acta1", "Fam189b", "Krt17", "")
+df$label <- ifelse(df$Gene.name %in% genes_to_label, df$Gene.name, NA)
+
+# Define colors
+dark_colors <- c("blue", "grey", "magenta")  # Dark colors for the border
+light_colors <- c("#ADD8E6","#D3D3D3", "#FFC0CB")  # Lighter colors for the fill (light blue and pink)
+
+# Generate the volcano plot
+ggplot(data = df, aes(x = log2FoldChange, y = -log10(padj),fill = diffexpressed, color = diffexpressed)) +
+  geom_point(shape = 21, size = 3, stroke = 0.7) +  # Use shape 21 for points with both color and fill , stroke for border thickness
+  scale_color_manual(values = dark_colors, labels = c("Downregulated", "Upregulated", "Not significant")) +
+  scale_fill_manual(values = light_colors, labels = c("Downregulated", "Upregulated", "Not significant")) +
+  ggtitle('FDD vs Knock out') +
+  geom_text(aes(label = label), vjust = -1, hjust = 0.5, size = 4) + xlim(-4,2) +ylim(0,17)
+
